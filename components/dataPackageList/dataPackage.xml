@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xsi:schemaLocation="iisis/schemas/2014/projects/singlec/iis/form ../../../../../schemas/2014/projects/singlec/iis/form/form.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="iisis/schemas/2014/projects/singlec/iis/form"
+      description="Пакеты данных">
+
+    <panel description="panel">
+        <pageList>
+            <page>
+                <controlList>
+                    <commandBar
+                            ID="commandBar"
+                            linkL="panel"
+                            linkR="panel"
+                            linkT="panel"
+                            autoFill="1"
+                            height="20">
+                        <buttonList>
+                            <button type="Action" description="Сохранить">
+                                <eventGroup>
+                                    <event name="$CommandBarButtonClick">
+                                        <event name="SaveObject" class="$control:ID:form"/>
+                                    </event>
+                                </eventGroup>
+                            </button>
+                        </buttonList>
+                    </commandBar>
+                    <textBox ID="objectUUID" valueType="iis-sql:UUID" visible="0"/>
+                    <label ID="LabelDescription"
+                           description="Описание:"
+                           linkL="panel"
+                           linkR="Description.linkL."
+                           linkT="commandBar.linkB."
+                           height="20"
+                           width="15%"/>
+                    <textBox ID="Description"
+                             valueType="iis-sql:string_255"
+                             linkL="LabelDescription.linkR."
+                             linkT="commandBar.linkB."
+                             linkR="Date.linkL."
+                             height="20"
+                             width="60%"
+                             clearButton="1"/>
+                    <textBox ID="Date" valueType="iis-sql:dateTime"
+                             linkL="panel.linkR."
+                             linkT="commandBar.linkB."
+                             linkR="panel"
+                             height="20"
+                             left="75%"
+                             choiceButton="1"/>
+                    <label ID="LabelSender" description="Отправитель:"
+                           linkL="panel"
+                           linkR="Sender.linkL."
+                           top="55"
+                           height="20"
+                           width="70"/>
+                    <textBox ID="Sender" valueType="iis-sql:string_255"
+                             linkL="LabelSender.linkR."
+                             linkR="panel"
+                             top="55"
+                             height="20"
+                             width="60%"
+                             choiceButton="1"/>
+                    <label ID="LabelStatus" description="Статус:"
+                           linkL="Sender.linkR."
+                           linkR="Sender.linkR."
+                           top="55"
+                           height="20"
+                           width="40"
+                            />
+                    <textBox ID="Status" valueType="iis-sql:boolean"
+                             linkL="LabelStatus.linkR."
+                             linkR="panel"
+                             top="55"
+                             height="20"
+                             choiceButton="1"/>
+                    <label ID="LabelRecipient" description="Получатель:"
+                           linkL="panel"
+                           linkR="Recipient.linkL."
+                           top="77"
+                           height="20"
+                           width="70"/>
+                    <textBox ID="Recipient" valueType="iis-sql:string_255"
+                             linkL="LabelRecipient.linkR."
+                             linkR="panel"
+                             top="77"
+                             height="20"
+                             width="60%"
+                             choiceButton="1"/>
+                    <label ID="LabelRoute" description="Направление:"
+                           linkL="Recipient.linkR."
+                           linkR="Recipient.linkR."
+                           top="77"
+                           height="20"
+                           width="40"
+                            />
+                    <textBox ID="Route" valueType="iis-sql:boolean"
+                             linkL="LabelRoute.linkR."
+                             linkR="panel"
+                             top="77"
+                             height="20"
+                             choiceButton="1"/>
+                    <label ID="LabelComment" description="Комментарий:"
+                           linkL="panel"
+                           linkR="panel.linkL."
+                           top="100"
+                           height="20"
+                           width="80"
+                            />
+                    <textBox ID="Comment" valueType="iis-sql:string_255"
+                             linkL="LabelComment.linkR."
+                             linkR="panel"
+
+                             top="100"
+                             height="20"
+                             choiceButton="1"/>
+                    <tableBox ID="attachmentList"
+                              valueType="@XSD:iisis/schemas/2014/iis/dataPackageList|||attachment"
+                              linkT="Comment.linkB."
+                              linkL="panel"
+                              linkR="panel"
+                              linkB="panel">
+                        <fieldList>
+                            <field data="objectUUID" description="ИД" width="2"/>
+                            <field data="name" description="Имя" width="10"/>
+                        </fieldList>
+                        <eventGroup>
+                            <event name="$TableBoxBeforeAddRow">
+                                <event name="AttachmentListAddRow">
+                                    <parameterList>
+                                        <parameter name="$controlValue"/>
+                                    </parameterList>
+                                </event>
+                            </event>
+                        </eventGroup>
+                    </tableBox>
+                </controlList>
+            </page>
+        </pageList>
+    </panel>
+
+    <eventGroup>
+        <event name="$FormBeforeClose">
+            <event name="@FormBeforeClose"/>
+        </event>
+        <event name="$FormBeforeOpen">
+            <event name="ObjectToForm">
+                <parameterList>
+                    <parameter name="$form"/>
+                    <parameter name="$FS"/>
+                </parameterList>
+            </event>
+        </event>
+        <event name="SaveObject">
+            <event name="SaveObject">
+                <parameterList>
+                    <parameter name="$form"/>
+                    <parameter name="iis.dataPackageList.db.fileSystem"/>
+                </parameterList>
+            </event>
+        </event>
+    </eventGroup>
+</form>

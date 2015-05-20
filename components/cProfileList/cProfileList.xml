@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xsi:schemaLocation="iisis/schemas/2014/projects/singlec/iis/form ../../../../../schemas/2014/projects/singlec/iis/form/form.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="iisis/schemas/2014/projects/singlec/iis/form"
+      description="Профили подключения">
+
+    <panel description="panel">
+        <pageList>
+            <page>
+                <controlList>
+                    <commandBar ID="commandBarCProfileList"
+                                height="20"
+                                linkL="panel"
+                                linkR="panel"
+                                linkT="panel"
+                                linkB="cProfileList.linkT."
+                                autoFill="1">
+                        <buttonList></buttonList>
+                    </commandBar>
+                    <tableBox ID="cProfileList"
+                              class=".controls.cProfileList"
+                              valueType="@DB:iis.cProfileList.db.fileSystem"
+                              linkL="panel"
+                              linkR="panel"
+                              linkT="commandBarCProfileList.linkB."
+                              linkB="panel">
+                        <fieldList>
+                            <field data="objectUUID" description="UUID" width="1"/>
+                            <field data="description" description="Описание" width="10"/>
+                            <field data="type" description="тип" width="10"/>
+                        </fieldList>
+                        <eventGroup>
+                            <event name="$TableBoxBeforeAddRow">
+                                <event name="@TableBoxOpenObjectForm" class="$control:ID:cProfileList"/>
+                            </event>
+                            <event name="$TableBoxBeforeDeleteRow">
+                                <event name="@TableBoxDeleteObjectByCurrentRow"/>
+                            </event>
+                            <event name="$TableBoxSelection">
+                                <event name="@TableBoxOpenObjectForm" class="$control:ID:cProfileList"/>
+                            </event>
+                            <event name="$TableBoxNewObjectWriteProcessing">
+                                <event name="@TableBoxNewObjectWriteProcessing"></event>
+                            </event>
+                            <event name="@TableBoxOpenObjectForm">
+                                <event name="@TableBoxOpenObjectForm">
+                                    <parameterList>
+                                        <parameter name="$form"/>
+                                        <parameter name="$CS"/>
+                                        <parameter name="$controlOptions"/>
+                                        <parameter name="iis.cProfileList.cProfile"/>
+                                    </parameterList>
+                                </event>
+                            </event>
+                            <event name="ExternalEvent">
+                                <event name="@TableBoxUpdateRowByObject">
+                                    <parameterList>
+                                        <parameter name="$CS"/>
+                                        <parameter name="@Data"/>
+                                    </parameterList>
+                                </event>
+                            </event>
+                        </eventGroup>
+                    </tableBox>
+                </controlList>
+            </page>
+        </pageList>
+    </panel>
+    <eventGroup>
+        <event name="$FormBeforeClose">
+            <event name="@FormBeforeClose"/>
+        </event>
+    </eventGroup>
+</form>

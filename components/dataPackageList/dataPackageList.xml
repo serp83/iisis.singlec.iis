@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xsi:schemaLocation="iisis/schemas/2014/projects/singlec/iis/form ../../../../../projects/xsd/2014/projects/singlec/iis/form/form.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="iisis/schemas/2014/projects/singlec/iis/form"
+      description="Пакеты данных">
+
+    <panel>
+        <pageList>
+            <page>
+                <controlList>
+                    <commandBar ID="commandBarDataPackageList"
+                                height="20"
+                                linkL="panel"
+                                linkR="panel"
+                                linkT="panel"
+                                linkB="dataPackageList.linkT."
+                                class=".controls.dataPackageList"
+                                autoFill="1">
+                        <buttonList>
+                            <button type="Action" description="Очистить">
+                                <eventGroup>
+                                    <event name="$CommandBarButtonClick">
+                                        <event name="TableBoxClearObjectList" class="$control:ID:dataPackageList"/>
+                                    </event>
+                                </eventGroup>
+                            </button>
+                        </buttonList>
+                    </commandBar>
+                    <tableBox ID="dataPackageList"
+                              class=".controls.dataPackageList"
+                              valueType="@DB:iis.dataPackageList.db.fileSystem"
+                              linkL="panel"
+                              linkR="panel"
+                              linkT="commandBarDataPackageList.linkB."
+                              height="70%"
+                              linkB="splitter.linkT.">
+
+                        <fieldList>
+                            <field data="objectUUID" description="UUID" width="1"/>
+                            <field data="description" description="Описание" width="5"/>
+                            <field data="status" description="Статус" width="1"/>
+                            <field data="date" description="Дата" width="2"/>
+                            <field data="route" description="Направление" width="1"/>
+                            <field data="recipient" description="Получатель" width="5"/>
+                            <field data="sender" description="Отправитель" width="5"/>
+                            <field data="comment" description="Комментарий" width="3"/>
+                        </fieldList>
+                        <eventGroup>
+                            <event name="$TableBoxBeforeAddRow">
+                                <event name="@TableBoxOpenObjectForm" class="$control:ID:dataPackageList"/>
+                            </event>
+                            <event name="$TableBoxBeforeDeleteRow">
+                                <event name="@TableBoxDeleteObjectByCurrentRow"/>
+                            </event>
+                            <event name="$TableBoxSelection">
+                                <event name="@TableBoxOpenObjectForm" class="$control:ID:dataPackageList"/>
+                            </event>
+                            <event name="$TableBoxOnActivateRow">
+                                <event name="@TableBoxGetObjectByCurrentRow"/>
+                                <event name="UpdateAttachmentList" class="iis.dataPackageList.dataPackage">
+                                    <parameterList>
+                                        <parameter name="$control:ID:attachmentList"/>
+                                        <parameter name="@Object"/>
+                                    </parameterList>
+                                </event>
+                            </event>
+                            <event name="@TableBoxOpenObjectForm">
+                                <event name="@TableBoxOpenObjectForm">
+                                    <parameterList>
+                                        <parameter name="$form"/>
+                                        <parameter name="$CS"/>
+                                        <parameter name="$controlOptions"/>
+                                        <parameter name="iis.dataPackageList.dataPackage"/>
+                                    </parameterList>
+                                </event>
+                            </event>
+                            <event name="TableBoxClearObjectList">
+                                <event name="@TableBoxClearObjectList"/>
+                            </event>
+                            <event name="ExternalEvent">
+                                <event name="@TableBoxUpdateRowByObject">
+                                    <parameterList>
+                                        <parameter name="$CS"/>
+                                        <parameter name="@Data"/>
+                                    </parameterList>
+                                </event>
+                            </event>
+                        </eventGroup>
+                    </tableBox>
+                    <splitter ID="splitter"
+                              linkL="panel"
+                              linkR="panel"
+                              linkT="dataPackageList.linkB."
+                              linkB="attachmentList.linkT."
+                              height="1"/>
+                    <tableBox ID="attachmentList"
+                              valueType="@XSD:iisis/schemas/2014/iis/dataPackageList|||attachment"
+                              linkT="splitter.linkT."
+                              linkL="panel"
+                              linkR="panel"
+                              linkB="panel">
+                        <fieldList>
+                            <field data="objectUUID" description="ИД" width="2"/>
+                            <field data="name" description="Имя" width="10"/>
+                        </fieldList>
+                    </tableBox>
+                </controlList>
+            </page>
+        </pageList>
+    </panel>
+
+    <eventGroup>
+        <event name="$FormBeforeClose">
+            <event name="@FormBeforeClose"/>
+        </event>
+    </eventGroup>
+</form>

@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xsi:schemaLocation="iisis/schemas/2014/projects/singlec/iis/form ../../../../../schemas/2014/projects/singlec/iis/form/form.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="iisis/schemas/2014/projects/singlec/iis/form" description="Профиль">
+
+    <panel>
+        <pageList>
+            <page>
+                <controlList>
+                    <commandBar
+                            ID="commandBar"
+                            linkL="panel"
+                            linkR="panel"
+                            linkT="panel"
+                            autoFill="1"
+                            height="20">
+                        <buttonList>
+                            <button type="Action" description="Сохранить">
+                                <eventGroup>
+                                    <event name="$CommandBarButtonClick">
+                                        <event name="SaveObject" class="$control:ID:form"/>
+                                    </event>
+                                </eventGroup>
+                            </button>
+                            <button type="Action" description="Проверить подключение">
+                                <eventGroup>
+                                    <event name="$CommandBarButtonClick">
+                                        <event name="CheckConnection">
+                                            <parameterList>
+                                                <parameter name="$form"/>
+                                                <parameter name="$controlValue:ID:Type"/>
+                                                <parameter name="$controlValue:ID:Description"/>
+                                            </parameterList>
+                                        </event>
+                                    </event>
+                                </eventGroup>
+                            </button>
+                        </buttonList>
+                    </commandBar>
+                    <label ID="LabelDescription" description="Наименование:"
+                           linkL="panel"
+                           linkT="commandBar.linkB."
+                           height="20"
+                           width="20%"/>
+                    <textBox ID="Description" valueType="iis-sql:string_255"
+                             linkL="LabelDescription.linkR."
+                             linkT="commandBar.linkB."
+                             linkR="LabelType.linkL."
+                             height="20"
+                             width="60%"/>
+                    <label ID="LabelType" description="Тип:"
+                           linkL="panel.linkR."
+                           linkR="Type.linkL."
+                           linkT="commandBar.linkB."
+                           left="80%"
+                           height="20"
+                           width="6%"/>
+                    <textBox ID="Type" valueType="iis-sql:string_255"
+                             linkL="panel.linkR."
+                             linkR="panel"
+                             linkT="commandBar.linkB."
+                             left="86%"
+                             height="20"
+                             choiceListButton="1"
+                            restoreValue="1">
+                        <valueList URI="@XSD:iisis/schemas/2014/iis/cProfileList|||cProfileType"/>
+                        <eventGroup>
+                            <event name="$TextBoxOnChange">
+                                <event name="UpdateControls">
+                                    <parameterList>
+                                        <parameter name="$control:ID:PanelConnectionProfile"/>
+                                        <parameter name="$controlValue:ID:Type"/>
+                                        <parameter name="$control:ID:PanelIMAPPOP3"/>
+                                        <parameter name="$controlValue:ID:UseIMAP"/>
+                                    </parameterList>
+                                </event>
+                            </event>
+                        </eventGroup>
+                    </textBox>
+                    <panel ID="PanelConnectionProfile"
+                           linkL="panel"
+                           linkR="panel"
+                           linkT="Description.linkB."
+                           linkB="panel">
+                        <pageList>
+                            <page ID="db">
+                                <controlList>
+                                    <label ID="LabelDB" description="Настройки сервера"
+                                           linkL="panel"
+                                           linkR="panel"
+                                           linkT="panel"
+                                           height="10"/>
+                                    <label ID="LabelDBDriver" description="Драйвер:"
+                                           linkL="panel"
+                                           linkT="LabelDB.linkB."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="DBDriver" valueType="iis-sql:string_255"
+                                             linkL="LabelDBDriver.linkR."
+                                             linkT="LabelDB.linkB."
+                                             linkR="panel"
+                                             height="20"
+                                             clearButton="1"/>
+                                    <label ID="LabelDBServer" description="Сервер:"
+                                           linkL="panel"
+                                           linkT="LabelDBDriver.linkB."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="DBServer" valueType="iis-sql:string_255"
+                                             linkL="LabelDBServer.linkR."
+                                             linkR="panel"
+                                             top="37"
+                                             height="20"
+                                             width="70%"
+                                             clearButton="1"/>
+                                    <label ID="LabelDBPort" description="Порт:"
+                                           linkL="DBServer.linkR."
+                                           linkR="panel"
+                                           top="37"
+                                           height="20"
+                                           width="8%"/>
+                                    <textBox ID="DBPort" valueType="iis-sql:int_11"
+                                             linkL="LabelDBPort.linkR."
+                                             linkR="panel"
+                                             height="20"
+                                             top="37"/>
+                                    <label ID="LabelDBLogin" description="Логин:"
+                                           linkL="panel"
+                                           linkT="LabelDBServer.linkB."
+                                           linkR="DBLogin.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="DBLogin" valueType="iis-sql:string_255"
+                                             linkL="LabelDBLogin.linkR."
+                                             linkT="LabelDBServer.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelDBPassword" description="Пароль:"
+                                           linkL="panel"
+                                           linkT="LabelDBLogin.linkB."
+                                           linkR="DBPassword.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="DBPassword" valueType="iis-sql:string_255"
+                                             linkL="LabelDBPassword.linkR."
+                                             linkT="LabelDBLogin.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelDBDatabase" description="База д-х:"
+                                           linkL="panel"
+                                           linkT="LabelDBPassword.linkB."
+                                           linkR="DBDatabase.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="DBDatabase" valueType="iis-sql:string_255"
+                                             linkL="LabelDBDatabase.linkR."
+                                             linkT="LabelDBPassword.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelDBParameters" description="Параметры:"
+                                           linkL="panel"
+                                           linkT="LabelDBDatabase.linkB."
+                                           linkR="DBParameters.linkL."
+                                           linkB="panel"
+                                           width="13%"/>
+                                    <textBox ID="DBParameters" valueType="iis-sql:string_255"
+                                             linkL="LabelDBParameters.linkR."
+                                             linkT="LabelDBDatabase.linkB."
+                                             linkR="panel"
+                                             linkB="panel"/>
+                                </controlList>
+                            </page>
+                            <page ID="fileSystem">
+                                <controlList>
+                                    <label ID="FILESYSTEMPath" description="Путь:"
+                                           linkL="panel"
+                                           linkT="panel"
+                                           linkR="FILESYSTEMCatalog.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="FILESYSTEMCatalog" valueType="iis-sql:string_255"
+                                             linkL="FILESYSTEMPath.linkR."
+                                             linkT="panel"
+                                             linkR="panel"
+                                             height="20"
+                                             clearButton="1"/>
+                                    <label ID="LabelFILESYSTEMLogin" description="Логин:"
+                                           linkL="panel"
+                                           linkT="FILESYSTEMPath.linkB."
+                                           linkR="FILESYSTEMLogin.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="FILESYSTEMLogin" valueType="iis-sql:string_255"
+                                             linkL="LabelFILESYSTEMLogin.linkR."
+                                             linkT="FILESYSTEMPath.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelFILESYSTEMPassword" description="Пароль:"
+                                           linkL="panel"
+                                           linkT="LabelFILESYSTEMLogin.linkB."
+                                           linkR="FILESYSTEMPassword.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="FILESYSTEMPassword" valueType="iis-sql:string_255"
+                                             linkL="LabelFILESYSTEMPassword.linkR."
+                                             linkT="LabelFILESYSTEMLogin.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                </controlList>
+                            </page>
+                            <page ID="http">
+                                <controlList>
+                                    <label ID="LabelHTTP" description="Настройки сервера"
+                                           linkL="panel"
+                                           linkR="panel"
+                                           linkT="panel"
+                                           height="10"/>
+                                    <label ID="LabelHTTPServer" description="Сервер:"
+                                           linkL="panel"
+                                           top="37"
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="HTTPServer" valueType="iis-sql:string_255"
+                                             linkL="LabelHTTPServer.linkR."
+                                             linkR="panel"
+                                             top="37"
+                                             height="20"
+                                             width="70%"
+                                             clearButton="1"/>
+                                    <label ID="LabelHTTPPort" description="Порт:"
+                                           linkL="HTTPServer.linkR."
+                                           linkR="panel"
+                                           top="37"
+                                           height="20"
+                                           width="8%"/>
+                                    <textBox ID="HTTPPort" valueType="iis-sql:int_11"
+                                             linkL="LabelHTTPPort.linkR."
+                                             linkR="panel"
+                                             height="20"
+                                             top="37"/>
+                                    <label ID="LabelHTTPLogin" description="Логин:"
+                                           linkL="panel"
+                                           linkT="LabelHTTPServer.linkB."
+                                           linkR="HTTPLogin.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="HTTPLogin" valueType="iis-sql:string_255"
+                                             linkL="LabelHTTPLogin.linkR."
+                                             linkT="LabelHTTPServer.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelHTTPPassword" description="Пароль:"
+                                           linkL="panel"
+                                           linkT="LabelHTTPLogin.linkB."
+                                           linkR="HTTPPassword.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="HTTPPassword" valueType="iis-sql:string_255"
+                                             linkL="LabelHTTPPassword.linkR."
+                                             linkT="LabelHTTPLogin.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelHTTPTimeout" description="Timeout соединения:"
+                                           linkL="panel"
+                                           linkT="LabelHTTPPassword.linkB."
+                                           linkR="HTTPTimeout.linkL."
+                                           height="20"
+                                           width="27%"/>
+                                    <textBox ID="HTTPTimeout" valueType="iis-sql:int_11"
+                                             linkL="LabelHTTPTimeout.linkR."
+                                             linkT="LabelHTTPPassword.linkB."
+                                             height="20"
+                                             width="10%"/>
+                                    <checkBox ID="HTTPUseSSL" description="Шифровать(SSL/TLS)"
+                                              linkL="HTTPTimeout.linkR."
+                                              linkT="LabelHTTPPassword.linkB."
+                                              linkR="panel"
+                                              left="40%"
+                                              height="20"
+                                              value="1"/>
+                                </controlList>
+                            </page>
+                            <page ID="ftp">
+                                <controlList>
+                                    <label ID="LabelFTP" description="Настройки сервера"
+                                           linkL="panel"
+                                           linkR="panel"
+                                           linkT="panel"
+                                           height="10"/>
+                                    <label ID="LabelFTPServer" description="Сервер:"
+                                           linkL="panel"
+                                           top="37"
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="FTPServer" valueType="iis-sql:string_255"
+                                             linkL="LabelFTPServer.linkR."
+                                             linkR="panel"
+                                             top="37"
+                                             height="20"
+                                             width="70%"
+                                             clearButton="1"/>
+                                    <label ID="LabelFTPPort" description="Порт:"
+                                           linkL="FTPServer.linkR."
+                                           linkR="panel"
+                                           top="37"
+                                           height="20"
+                                           width="8%"/>
+                                    <textBox ID="FTPPort" valueType="iis-sql:int_11"
+                                             linkL="LabelFTPPort.linkR."
+                                             linkR="panel"
+                                             height="20"
+                                             top="37"/>
+                                    <label ID="LabelFTPLogin" description="Логин:"
+                                           linkL="panel"
+                                           linkT="LabelFTPServer.linkB."
+                                           linkR="FTPLogin.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="FTPLogin" valueType="iis-sql:string_255"
+                                             linkL="LabelFTPLogin.linkR."
+                                             linkT="LabelFTPServer.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelFTPPassword" description="Пароль:"
+                                           linkL="panel"
+                                           linkT="LabelFTPLogin.linkB."
+                                           linkR="FTPPassword.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="FTPPassword" valueType="iis-sql:string_255"
+                                             linkL="LabelFTPPassword.linkR."
+                                             linkT="LabelFTPLogin.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelFTPCatalog" description="Каталог:"
+                                           linkL="panel"
+                                           linkT="LabelFTPPassword.linkB."
+                                           linkR="FTPPassword.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="FTPCatalog" valueType="iis-sql:string_255"
+                                             linkL="LabelFTPCatalog.linkR."
+                                             linkT="LabelFTPPassword.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <checkBox ID="FTPPassiveMode" description="Пассивный режим"
+                                              linkL="panel"
+                                              linkT="LabelFTPCatalog.linkB."
+                                              height="20"
+                                              width="115"
+                                              descriptionLocation="Left"/>
+                                </controlList>
+                            </page>
+                            <page ID="email">
+                                <controlList>
+                                    <label ID="LabelIMAPPOP3" description="Настройки сервера входящих сообщений"
+                                           linkL="panel"
+                                           linkR="panel"
+                                           linkT="panel"
+                                           height="10"/>
+                                    <checkBox ID="UseIMAP" description="Использовать протокол IMAP" value="1"
+                                              linkL="panel"
+                                              linkT="LabelIMAPPOP3.linkB."
+                                              linkR="panel.linkL."
+                                              height="10"
+                                              width="180"/>
+                                    <panel ID="PanelIMAPPOP3"
+                                           linkR="panel"
+                                           linkT="UseIMAP.linkB."
+                                           linkL="panel"
+                                           linkB="LabelSMTP.linkT."
+                                           height="110">
+                                        <pageList>
+                                            <page ID="POP3">
+                                                <controlList>
+                                                    <label ID="LabelPOP3Server" description="Сервер:"
+                                                           linkL="panel"
+                                                           linkT="panel"
+                                                           height="20"
+                                                           width="13%"/>
+                                                    <textBox ID="POP3Server" valueType="iis-sql:string_255"
+                                                             linkL="LabelPOP3Server.linkR."
+                                                             linkT="panel"
+                                                             linkR="panel"
+                                                             height="20"
+                                                             width="70%"
+                                                             clearButton="1"/>
+                                                    <label ID="LabelPOP3Port" description="Порт:"
+                                                           linkL="POP3Server.linkR."
+                                                           linkR="panel"
+                                                           height="20"
+                                                           width="8%"/>
+                                                    <textBox ID="POP3Port" valueType="iis-sql:int_11"
+                                                             linkL="LabelPOP3Port.linkR."
+                                                             linkR="panel"
+                                                             height="20"/>
+                                                    <label ID="LabelPOP3Login" description="Логин:"
+                                                           linkL="panel"
+                                                           linkT="LabelPOP3Server.linkB."
+                                                           linkR="POP3Login.linkL."
+                                                           height="20"
+                                                           width="13%"/>
+                                                    <textBox ID="POP3Login" valueType="iis-sql:string_255"
+                                                             linkL="LabelPOP3Login.linkR."
+                                                             linkT="LabelPOP3Server.linkB."
+                                                             linkR="panel"
+                                                             height="20"/>
+                                                    <label ID="LabelPOP3Password" description="Пароль:"
+                                                           linkL="panel"
+                                                           linkT="LabelPOP3Login.linkB."
+                                                           linkR="POP3Password.linkL."
+                                                           height="20"
+                                                           width="13%"/>
+                                                    <textBox ID="POP3Password" valueType="iis-sql:string_255"
+                                                             linkL="LabelPOP3Password.linkR."
+                                                             linkT="LabelPOP3Login.linkB."
+                                                             linkR="panel"
+                                                             height="20"/>
+                                                    <checkBox ID="POP3UseSSL" description="Использовать шифрование"
+                                                              linkL="panel"
+                                                              linkT="LabelPOP3Password.linkB."
+                                                              descriptionLocation="Left"
+                                                              height="20"
+                                                              width="160"
+                                                              value="1"/>
+                                                </controlList>
+                                            </page>
+                                            <page ID="IMAP">
+                                                <controlList>
+                                                    <label ID="LabelIMAPServer" description="Сервер:"
+                                                           linkL="panel"
+                                                           linkT="panel"
+                                                           height="20"
+                                                           width="13%"/>
+                                                    <textBox ID="IMAPServer" valueType="iis-sql:string_255"
+                                                             linkL="LabelIMAPServer.linkR."
+                                                             linkT="panel"
+                                                             linkR="panel"
+                                                             height="20"
+                                                             width="70%"
+                                                             clearButton="1"/>
+                                                    <label ID="LabelIMAPPort" description="Порт:"
+                                                           linkL="IMAPServer.linkR."
+                                                           linkR="panel"
+                                                           height="20"
+                                                           width="8%"/>
+                                                    <textBox ID="IMAPPort" valueType="iis-sql:int_11"
+                                                             linkL="LabelIMAPPort.linkR."
+                                                             linkR="panel"
+                                                             height="20"/>
+                                                    <label ID="LabelIMAPLogin" description="Логин:"
+                                                           linkL="panel"
+                                                           linkT="LabelIMAPServer.linkB."
+                                                           linkR="IMAPLogin.linkL."
+                                                           height="20"
+                                                           width="13%"/>
+                                                    <textBox ID="IMAPLogin" valueType="iis-sql:string_255"
+                                                             linkL="LabelIMAPLogin.linkR."
+                                                             linkT="LabelIMAPServer.linkB."
+                                                             linkR="panel"
+                                                             height="20"/>
+                                                    <label ID="LabelIMAPPassword" description="Пароль:"
+                                                           linkL="panel"
+                                                           linkT="LabelIMAPLogin.linkB."
+                                                           linkR="IMAPPassword.linkL."
+                                                           height="20"
+                                                           width="13%"/>
+                                                    <textBox ID="IMAPPassword" valueType="iis-sql:string_255"
+                                                             linkL="LabelIMAPPassword.linkR."
+                                                             linkT="LabelIMAPLogin.linkB."
+                                                             linkR="panel"
+                                                             height="20"/>
+                                                    <checkBox ID="IMAPUseSSL" description="Использовать шифрование"
+                                                              linkL="panel"
+                                                              linkT="LabelIMAPPassword.linkB."
+                                                              descriptionLocation="Left"
+                                                              height="20"
+                                                              width="160"
+                                                              value="1"/>
+                                                </controlList>
+                                            </page>
+                                        </pageList>
+                                    </panel>
+                                    <label ID="LabelSMTP" description="Настройки сервера исходящих сообщений"
+                                           linkL="panel"
+                                           linkR="panel"
+                                           linkT="PanelIMAPPOP3.linkB."
+                                           height="10"/>
+                                    <label ID="LabelSMTPServer" description="Сервер:"
+                                           linkL="panel"
+                                           linkT="LabelSMTP.linkB."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="SMTPServer" valueType="iis-sql:string_255"
+                                             linkL="LabelSMTPServer.linkR."
+                                             linkT="LabelSMTP.linkB."
+                                             linkR="panel"
+                                             height="20"
+                                             width="70%"
+                                             clearButton="1"/>
+                                    <label ID="LabelSMTPPort" description="Порт:"
+                                           linkL="SMTPServer.linkR."
+                                           linkT="LabelSMTP.linkB."
+                                           linkR="panel"
+                                           height="20"
+                                           width="8%"/>
+                                    <textBox ID="SMTPPort" valueType="iis-sql:int_11"
+                                             linkL="LabelSMTPPort.linkR."
+                                             linkT="LabelSMTP.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelSMTPLogin" description="Логин:"
+                                           linkL="panel"
+                                           linkT="LabelSMTPServer.linkB."
+                                           linkR="SMTPLogin.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="SMTPLogin" valueType="iis-sql:string_255"
+                                             linkL="LabelSMTPLogin.linkR."
+                                             linkT="LabelSMTPServer.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <label ID="LabelSMTPPassword" description="Пароль:"
+                                           linkL="panel"
+                                           linkT="LabelSMTPLogin.linkB."
+                                           linkR="SMTPPassword.linkL."
+                                           height="20"
+                                           width="13%"/>
+                                    <textBox ID="SMTPPassword" valueType="iis-sql:string_255"
+                                             linkL="LabelSMTPPassword.linkR."
+                                             linkT="LabelSMTPLogin.linkB."
+                                             linkR="panel"
+                                             height="20"/>
+                                    <checkBox ID="SMTPUseSSL" description="Использовать шифрование"
+                                              linkL="panel"
+                                              linkT="LabelSMTPPassword.linkB."
+                                              descriptionLocation="Left"
+                                              height="20"
+                                              width="160"
+                                              value="1"/>
+                                </controlList>
+                            </page>
+                        </pageList>
+                    </panel>
+                </controlList>
+            </page>
+        </pageList>
+    </panel>
+
+    <eventGroup>
+        <event name="$FormBeforeClose">
+            <event name="@FormBeforeClose"/>
+        </event>
+        <event name="$FormBeforeOpen">
+            <event name="ObjectToForm">
+                <parameterList>
+                    <parameter name="$form"/>
+                    <parameter name="$FS"/>
+                </parameterList>
+            </event>
+            <event name="$TextBoxOnChange" class="$control:ID:Type"/>
+        </event>
+        <event name="SaveObject">
+            <event name="SaveObject">
+                <parameterList>
+                    <parameter name="$form"/>
+                    <parameter name="$FS"/>
+                    <parameter name="iis.cProfileList.db.fileSystem"/>
+                    <parameter name="$controlValue:ID:Description"/>
+                    <parameter name="$controlValue:ID:Type"/>
+                </parameterList>
+            </event>
+        </event>
+    </eventGroup>
+</form>
