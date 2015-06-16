@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<form xsi:schemaLocation="iisis/schemas/2014/projects/singlec/iis/form ../../../../xsd/2014/projects/singlec/iis/form/form.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="iisis/schemas/2014/projects/singlec/iis/form"
+      description="Профили подключения">
+
+    <panel>
+        <pageList>
+            <page>
+                <controlList>
+                    <panel ID="Str1" description="Страница1"></panel>
+                    <commandBar ID="comandBar1">
+                        <buttonList>
+                            <button  type="Action" ID="button3" description="Knopka3"></button>
+                        </buttonList>
+                    </commandBar>
+                    <textBox ID="TextBox1" description="textbox1"></textBox>
+                    <textBox ID="TextBox2" description="textbox2" linkL="TextBox1"></textBox>
+                 </controlList>
+            </page>
+        </pageList>
+    </panel>
+
+</form>
