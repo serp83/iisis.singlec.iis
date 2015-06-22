@@ -23,6 +23,7 @@
                             <button  type="Action" ID="button4" description="Knopka4"></button>
                         </buttonList>
                     </commandBar>
+                    <splitter ID="splitter1" description="splitter1"></splitter>
                     <checkBox ID = "checkBox2" description="checkbox2"></checkBox>
                     <textBox ID="TextBox3" description="textbox3"></textBox>
                     <textBox ID="TextBox4" description="textbox4" linkL="TextBox3"></textBox>
