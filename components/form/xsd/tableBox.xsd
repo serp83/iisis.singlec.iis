@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:singlec-form="iisis/schemas/2014/projects/singlec/iis/form"
+        targetNamespace="iisis/schemas/2014/projects/singlec/iis/form"
+        xmlns:iis-sql="iisis/schemas/2014/iis/sql"
+        elementFormDefault="qualified">
+    <include schemaLocation="control.xsd"/>
+    <include schemaLocation="objectListOptions.xsd"/>
+    <include schemaLocation="textBox.xsd"/>
+    <import namespace="iisis/schemas/2014/iis/sql" schemaLocation="../../../../../xsd/2014/iis/sql.xsd"/>
+
+
+    <complexType name="tableBoxField">
+        <sequence>
+            <element name="control" type="singlec-form:textBoxBase" minOccurs="0"/>
+        </sequence>
+        <attribute name="data" type="iis-sql:string_255" default=""/>
+        <attribute name="width" type="iis-sql:string_25" default="1"/>
+        <attribute name="visible" type="iis-sql:boolean" default="1"/>
+        <attribute name="description" type="singlec-form:description"/>
+        <attribute name="ID" type="singlec-form:description"/>
+        <attribute name="displayDefaultPicture" type="iis-sql:boolean" default="0"/>
+    </complexType>
+    <complexType name="tableBoxFieldList">
+        <sequence>
+            <element name="field" type="singlec-form:tableBoxField" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="tableBox">
+        <complexContent>
+            <extension base="singlec-form:control">
+                <sequence>
+                    <element name="fieldList" type="singlec-form:tableBoxFieldList" minOccurs="0"/>
+                    <element name="objectListOptions" type="singlec-form:objectListOptions" minOccurs="0"/>
+                    <element name="eventGroup" type="singlec-form:eventGroup" minOccurs="0"/>
+                </sequence>
+                <attributeGroup ref="singlec-form:position"/>
+                <attribute name="valueType" type="singlec-form:controlValueType"/>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <element name="tableBox" type="singlec-form:tableBox"/>
+</schema>

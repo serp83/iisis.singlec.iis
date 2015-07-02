@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:singlec-form="iisis/schemas/2014/projects/singlec/iis/form"
+        targetNamespace="iisis/schemas/2014/projects/singlec/iis/form"
+        xmlns:iis-sql="iisis/schemas/2014/iis/sql"
+        elementFormDefault="qualified">
+    <include schemaLocation="control.xsd"/>
+    <import namespace="iisis/schemas/2014/iis/sql" schemaLocation="../../../../../xsd/2014/iis/sql.xsd"/>
+
+    <simpleType name="textBoxValueURI">
+        <union>
+            <simpleType>
+                <restriction base="iis-sql:string_255">
+                    <enumeration value="@XSD:"/>
+                    <enumeration value="@function:"/>
+                </restriction>
+            </simpleType>
+            <simpleType>
+                <restriction base="iis-sql:string_255"/>
+            </simpleType>
+        </union>
+    </simpleType>
+
+    <complexType name="textBoxValue">
+        <attribute name="value" type="iis-sql:string_255"/>
+        <attribute name="URI" type="singlec-form:textBoxValueURI"/>
+    </complexType>
+
+    <complexType name="textBoxValueList">
+        <sequence>
+            <element name="value" type="singlec-form:textBoxValue" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+        <attribute name="URI" type="singlec-form:textBoxValueURI"/>
+    </complexType>
+    <complexType name="textBoxBase">
+        <complexContent>
+            <extension base="singlec-form:control">
+                <sequence>
+                    <element name="valueList" type="singlec-form:textBoxValueList" minOccurs="0"/>
+                    <element name="eventGroup" type="singlec-form:eventGroup" minOccurs="0"/>
+                </sequence>
+                <attribute name="choiceListButton" type="iis-sql:boolean" default="0"/>
+                <attribute name="choiceButton" type="iis-sql:boolean" default="0"/>
+                <attribute name="clearButton" type="iis-sql:boolean" default="0"/>
+                <attribute name="openButton" type="iis-sql:boolean" default="0"/>
+                <attribute name="valueType" type="singlec-form:controlValueType" default="iis-sql:string_255"/>
+                <attribute name="picture" type="singlec-form:picture"/>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="textBox">
+        <complexContent>
+            <extension base="singlec-form:textBoxBase">
+                <attributeGroup ref="singlec-form:position"/>
+                <attribute name="useChoiceListHistory" type="iis-sql:boolean" default="0"/>
+                <attribute name="restoreValue" type="iis-sql:boolean" default="0"/>
+                <attribute name="value" type="iis-sql:string_255" default=""/>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <element name="textBox" type="singlec-form:textBox"/>
+</schema>

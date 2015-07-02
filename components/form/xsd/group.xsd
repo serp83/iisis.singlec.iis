@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:singlec-form="iisis/schemas/2014/projects/singlec/iis/form"
+        targetNamespace="iisis/schemas/2014/projects/singlec/iis/form"
+        elementFormDefault="qualified">
+
+    <include schemaLocation="button.xsd"/>
+    <include schemaLocation="panel.xsd"/>
+    <include schemaLocation="control.xsd"/>
+    <include schemaLocation="spreadsheetDocumentField.xsd"/>
+    <include schemaLocation="commandBar.xsd"/>
+    <include schemaLocation="tableBox.xsd"/>
+    <include schemaLocation="splitter.xsd"/>
+    <include schemaLocation="textBox.xsd"/>
+    <include schemaLocation="form.xsd"/>
+    <include schemaLocation="label.xsd"/>
+    <include schemaLocation="periodDate.xsd"/>
+    <include schemaLocation="objectListOptions.xsd"/>
+    <include schemaLocation="checkBox.xsd"/>
+
+    <complexType name="controlList">
+        <choice minOccurs="0" maxOccurs="unbounded">
+            <element ref="singlec-form:button" minOccurs="0"/>
+            <element ref="singlec-form:panel" minOccurs="0"/>
+            <element ref="singlec-form:spreadsheetDocumentField" minOccurs="0"/>
+            <element ref="singlec-form:commandBar" minOccurs="0"/>
+            <element ref="singlec-form:tableBox" minOccurs="0"/>
+            <element ref="singlec-form:splitter" minOccurs="0"/>
+            <element ref="singlec-form:textBox" minOccurs="0"/>
+            <element ref="singlec-form:label" minOccurs="0"/>
+            <element ref="singlec-form:form" minOccurs="0"/>
+            <element ref="singlec-form:periodDate" minOccurs="0"/>
+            <element ref="singlec-form:objectListOptions" minOccurs="0"/>
+            <element ref="singlec-form:checkBox" minOccurs="0"/>
+        </choice>
+    </complexType>
+
+
+    <element name="controlList" type="singlec-form:controlList"/>
+</schema>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:singlec-form="iisis/schemas/2014/projects/singlec/iis/form"
+        xmlns:iis-sql="iisis/schemas/2014/iis/sql"
+        targetNamespace="iisis/schemas/2014/projects/singlec/iis/form"
+        elementFormDefault="qualified">
+    <include schemaLocation="control.xsd"/>
+    <import namespace="iisis/schemas/2014/iis/sql" schemaLocation="../../../../../xsd/2014/iis/sql.xsd"/>
+    <complexType name="spreadsheetDocumentField">
+		<complexContent>
+			<extension base="singlec-form:control">
+				<sequence>
+                    <element name="eventGroup" type="singlec-form:eventGroup" minOccurs="0"/>
+				</sequence>
+                <attributeGroup ref="singlec-form:position"/>
+                <attribute name="verticalScrollBar" type="iis-sql:boolean" default="1"/>
+                <attribute name="horizontalScrollBar" type="iis-sql:boolean" default="1"/>
+			</extension>
+		</complexContent>
+	</complexType>
+
+    <element name="spreadsheetDocumentField" type="singlec-form:spreadsheetDocumentField"/>
+</schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:singlec-form="iisis/schemas/2014/projects/singlec/iis/form"
+        xmlns:iis-objectListOptions="iisis/schemas/2014/iis/objectListOptions"
+        xmlns:iis-sql="iisis/schemas/2014/iis/sql"
+        targetNamespace="iisis/schemas/2014/projects/singlec/iis/form"
+        elementFormDefault="qualified">
+    <import namespace="iisis/schemas/2014/iis/objectListOptions" schemaLocation="../../../../../xsd/2014/iis/objectListOptions.xsd"/>
+    <import namespace="iisis/schemas/2014/iis/sql" schemaLocation="../../../../../xsd/2014/iis/sql.xsd"/>
+    <include schemaLocation="control.xsd"/>
+    <include schemaLocation="spreadsheetDocumentField.xsd"/>
+    <include schemaLocation="tableBox.xsd"/>
+
+    <complexType name="OLOField">
+        <annotation>
+            <documentation>
+                useValueList - 1: фильтр можно установить по списку однотипных значений
+            </documentation>
+        </annotation>
+        <attribute name="fieldName" type="iis-objectListOptions:fieldName" use="required"/>
+        <attribute name="description" type="singlec-form:description"/>
+        <attribute name="valueType" type="singlec-form:controlValueType" default="iis-sql:string_255"/>
+        <attribute name="useComparison" type="iis-sql:boolean" default="1"/>
+
+        <attribute name="useValueList" type="iis-sql:boolean" default="0"/>
+        <attribute name="comparison" type="iis-objectListOptions:comparison" default="equal"/>
+    </complexType>
+    <complexType name="OLOFieldList">
+        <sequence>
+            <element name="field" type="singlec-form:OLOField" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="objectListOptions">
+        <complexContent>
+            <extension base="singlec-form:control">
+                <sequence>
+                    <element name="fieldList" type="singlec-form:OLOFieldList"/>
+                    <element name="eventGroup" type="singlec-form:eventGroup" minOccurs="0"/>
+                </sequence>
+                <attributeGroup ref="singlec-form:position"/>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <element name="objectListOptions" type="singlec-form:objectListOptions"/>
+</schema>
