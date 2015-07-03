@@ -19,3 +19,11 @@
 	Object - дл€ конкретной сущности из Array;
 	ObjectMap - дл€ Structure, Map;
 	Item - дл€ конкретной сущности из ObjectMap;
+6.  аждый класс имеет предопределенные методы:
+		Function Command(Command, ...) Export
+		Function CC(ComponentName, Command, ...)
+		Function Init()
+		
+		ћетоды Command и CC должны всегда находитс€ в самом низу класса поочередно сначала Command потом CC.
+		
+		
