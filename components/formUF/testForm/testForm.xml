@@ -10,6 +10,7 @@
                 <controlList>
                     <textBox ID="TextBox3" description="textbox3"></textBox>
                     <textBox ID="TextBox4" description="textbox4" linkL="TextBox3"></textBox>
+                    <button ></button>
                  </controlList>
             </page>
         </pageList>

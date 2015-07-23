@@ -21,7 +21,7 @@
 	Item - для конкретной сущности из ObjectMap;
 6. Каждый класс имеет предопределенные методы:
 		Function Command(Command, ...) Export
-		Function CC(ComponentName, Command, ...)
+		Function CC(ClassName, Command, ...)
 		Function Init()
 		
 		Методы Command и CC должны всегда находится в самом низу класса поочередно сначала Command потом CC.
