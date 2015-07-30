@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xsi:schemaLocation="iisis/schemas/2014/projects/singlec/iis/form ../../../../xsd/2014/projects/singlec/iis/form/form.xsd"
+<form xsi:schemaLocation="iisis/schemas/2014/projects/singlec/iis/form ../../../iis/components/form/xsd/form.xsd"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns="iisis/schemas/2014/projects/singlec/iis/form"
       description="Профили подключения">

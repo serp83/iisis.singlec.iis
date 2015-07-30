@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:singlec-syntacticParseTree="iisis/schemas/2014/projects/singlec/iis/compiler/classList"
+        targetNamespace="iisis/schemas/2014/projects/singlec/iis/compiler/classList"
+        elementFormDefault="qualified">
+
+    <simpleType name="variableType">
+        <union>
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="Undefined"/>
+                    <enumeration value="Null"/>
+                    <enumeration value="boolean"/>
+                </restriction>
+            </simpleType>
+
+            <simpleType>
+                <restriction base="string"/>
+            </simpleType>
+        </union>
+    </simpleType>
+
+    <simpleType name="variableLevel">
+        <restriction base="string">
+            <enumeration value="public"/>
+            <enumeration value="private"/>
+        </restriction>
+    </simpleType>
+    <complexType name="variable">
+        <attribute name="name"/>
+        <attribute name="level" type="singlec-syntacticParseTree:variableLevel"/>
+        <attribute name="type" type="string"/>
+    </complexType>
+
+    <complexType name="class">
+        <sequence>
+            <element name="variable" type="singlec-syntacticParseTree:variable" minOccurs="0" maxOccurs="1"/>
+            <element name="metod" type="singlec-syntacticParseTree:metod" minOccurs="0" maxOccurs="1"/>
+        </sequence>
+
+        <attribute name="name" type="string"/>
+        <attribute name="fullFileName" type="string"/>
+        <attribute name="ID" type="ID"/>
+    </complexType>
+
+    <complexType name="metod">
+        <sequence>
+            <element name="variable" type="singlec-syntacticParseTree:variable" minOccurs="0" maxOccurs="1"/>
+        </sequence>
+
+        <attribute name="name" type="string"/>
+        <attribute name="level" type="singlec-syntacticParseTree:variableLevel"/>
+        <attribute name="class" type="IDREF"/>
+    </complexType>
+
+    <complexType name="if">
+    </complexType>
+
+    <complexType name="for">
+    </complexType>
+
+    <complexType name="forEach">
+    </complexType>
+
+    <complexType name="while">
+    </complexType>
+
+    <element name="class"  type="singlec-syntacticParseTree:class"/>
+</schema>

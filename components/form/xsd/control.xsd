@@ -21,7 +21,7 @@
         <restriction base="iis-sql:string_255">
         </restriction>
     </simpleType>
-
+    
     <attributeGroup name="position">
         <annotation>
             <documentation>linkR,linkL,linkT,linkB - содержит шаблон [class|template|ID] после чего может следовать

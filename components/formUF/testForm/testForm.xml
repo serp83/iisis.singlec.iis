@@ -8,9 +8,31 @@
         <pageList>
             <page>
                 <controlList>
-                    <textBox ID="TextBox3" description="textbox3"></textBox>
-                    <textBox ID="TextBox4" description="textbox4" linkL="TextBox3"></textBox>
-                    <button ></button>
+                    <textBox ID="TextBox1"
+                             description="TextBox1"
+                             linkL="panel"
+                             linkT="panel"
+                             linkR="textBox2.linkL."
+                             linkB="panel"
+                             height="19"
+                             clearButton="1"
+                             openButton="1"
+                             choiceButton="1"
+                             useChoiceListHistory="1"
+                             valueType="iis-sql:string_255"
+                             picture="zoom">
+                        <eventGroup>
+                            <event name="$TextBoxOnChange"></event>
+                        </eventGroup>
+                    </textBox>
+
+                    <textBox ID="textBox2"
+                             description="textBox2"
+                             linkL="panel"
+                            linkB="panel"
+                            linkR="panel"
+                            linkT="panel">
+                    </textBox>
                  </controlList>
             </page>
         </pageList>
